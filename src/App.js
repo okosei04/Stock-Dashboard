@@ -1,25 +1,20 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import React from 'react';
+import Dashboard from './components/Dashboard';
 import './App.css';
+import ThemeContext from './context/ThemeContext';
+import StockContext from './context/StockContext';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [darkMode, setDarkMode] = useState(false)
+  const [stockSymbol, setStockSymbol] = useState("FB")
+
+  return  <ThemeContext.Provider value={{darkMode, setDarkMode }}>
+    <StockContext.Provider value={{ stockSymbol, setStockSymbol}}>
+    <Dashboard />
+    </StockContext.Provider>
+    
+  </ThemeContext.Provider>;
 }
 
 export default App;
